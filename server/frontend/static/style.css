@@ -124,3 +124,9 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+
+.custom-card {
+    border-radius: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
