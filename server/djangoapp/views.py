@@ -1,6 +1,6 @@
 # Uncomment the required imports before adding the code
 
-# from django.shortcuts import render
+import requests
 # from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 # from django.shortcuts import get_object_or_404, render, redirect
@@ -129,9 +129,9 @@ def get_dealer_details(request, dealer_id):
     if dealer_id:
         endpoint = "/fetchDealer/"+str(dealer_id)
         dealership = get_request(endpoint)
-        return JsonResponse({"status":200,"dealer":dealership})
+        return JsonResponse({"status": 200, "dealer": dealership})
     else:
-        return JsonResponse({"status":400,"message":"Bad Request"})
+        return JsonResponse({"status": 400, "message": "Bad Request"})
 
 
 def add_review(request):
@@ -141,6 +141,11 @@ def add_review(request):
             post_review(data)
             return JsonResponse({"status": 200})
         except requests.exceptions.RequestException:
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+            return JsonResponse(
+                {
+                    "status": 401,
+                    "message": "Error in posting review"
+                }
+            )
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
